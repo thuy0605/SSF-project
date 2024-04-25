@@ -1,0 +1,13 @@
+type Question {
+  id: ID
+  question: string
+}
+
+type Query {
+  questions: [Question]
+  question(id: ID!): Question
+}
+
+type Mutation {
+  createQuestion(question: string): Question
+}
