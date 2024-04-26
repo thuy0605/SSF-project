@@ -1,9 +1,9 @@
 import mongoose, { Document } from "mongoose";
 
-type Chat = {
+type Question = {
   _id: mongoose.Types.ObjectId;
   id?: mongoose.Types.ObjectId;
-  message: string;
+  question: string;
 };
 
 type User = Partial<Document> & {
@@ -12,4 +12,4 @@ type User = Partial<Document> & {
   password: string;
 };
 
-export type { Chat, User };
+export type { Question, User };

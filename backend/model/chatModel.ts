@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
-import { Chat } from "../types/DBTypes";
+import { Question } from "../types/DBTypes";
 
-const chatSchema = new mongoose.Schema({
-  message: {
+const chatSchema = new mongoose.Schema<Question>({
+  question: {
     type: String,
-    required: true,
   },
 });
 
-export default mongoose.model<Chat>("Chat", chatSchema);
+export default mongoose.model<Question>("Question", chatSchema);

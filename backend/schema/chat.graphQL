@@ -1,6 +1,6 @@
 type Question {
   id: ID
-  question: string
+  question: String
 }
 
 type Query {
@@ -8,6 +8,10 @@ type Query {
   question(id: ID!): Question
 }
 
+input QuestionInput {
+  body: String!
+}
+
 type Mutation {
-  createQuestion(question: string): Question
+  createQuestion(question: QuestionInput): Question
 }
