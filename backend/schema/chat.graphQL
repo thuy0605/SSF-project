@@ -9,9 +9,9 @@ type Query {
 }
 
 input QuestionInput {
-  body: String!
+  question: String!
 }
 
 type Mutation {
-  createQuestion(question: QuestionInput): Question
+  createQuestion(body: QuestionInput): Question
 }
