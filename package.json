@@ -10,6 +10,7 @@
     "backend:dev": "nodemon --watch backend --exec tsx ./src/backend/index.ts"
   },
   "dependencies": {
+    "@apollo/client": "^3.10.1",
     "@apollo/server": "^4.10.4",
     "@graphql-tools/load-files": "^7.0.0",
     "@graphql-tools/merge": "^9.0.3",
