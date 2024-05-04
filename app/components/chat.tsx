@@ -1,7 +1,7 @@
 "use client";
 import React, { use, useEffect, useState } from "react";
 import { Props, Answer, Question } from "./type";
-import { GET_QUESTIONS, useFetch } from "./data";
+import { GET_QUESTIONS, useFetch } from "./dataQuestion";
 import { useMutation, useQuery, gql } from "@apollo/client";
 
 const CREATE_QUESTION = gql`
@@ -19,14 +19,14 @@ export function Chat({ name }: Props) {
   const [createQuestion] = useMutation(CREATE_QUESTION, {
     refetchQueries: [GET_QUESTIONS],
   });
-  //Get questions from the server
+
   const { data } = useFetch();
 
   useEffect(() => {
     if (data) {
       setQuestions([...data.questions]);
     }
-  }, [data, questions]);
+  }, [data]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

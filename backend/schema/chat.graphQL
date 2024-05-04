@@ -1,6 +1,7 @@
 type Question {
   id: ID
   question: String
+  # owner: User
 }
 
 type Query {

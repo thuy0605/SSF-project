@@ -4,12 +4,18 @@ type Question = {
   _id: mongoose.Types.ObjectId;
   id?: mongoose.Types.ObjectId;
   question: string;
+  // owner: mongoose.Types.ObjectId;
 };
 
 type User = Partial<Document> & {
-  user_name: string;
-  email: string;
+  _id: mongoose.Types.ObjectId;
+  id?: mongoose.Types.ObjectId;
+  username: string;
   password: string;
 };
 
-export type { Question, User };
+type UserWithoutPassword = Omit<User, "password">;
+
+type UserWithoutPasswordRole = Omit<UserWithoutPassword, "role">;
+
+export type { Question, User, UserWithoutPassword, UserWithoutPasswordRole };

@@ -12,4 +12,10 @@ interface Answer {
   answer: string;
 }
 
-export type { Props, Question, Answer };
+interface User {
+  id: number;
+  username: string;
+  password: string;
+}
+
+export type { Props, Question, Answer, User };

@@ -1,6 +1,6 @@
 "use client";
 import { Chat } from "./components/chat";
-import { Login } from "./components/login";
+import { Register } from "./components/register";
 import { ApolloProvider } from "@apollo/client";
 import client from "./components/apollo_client";
 
@@ -8,7 +8,6 @@ export default function Home() {
   return (
     <ApolloProvider client={client}>
       <main className="flex w-full h-full">
-        {/* <Login /> */}
         <div className="flex flex-col justify-center w-1/4 h-screen">
           <div className="flex flex-col justify-center h-1/3 ">
             <h1 className="flex justify-start ml-1 mt-10 font-mono text-5xl text-amber-600">
@@ -36,7 +35,8 @@ export default function Home() {
           </div>
         </div>
         <div className="bg-stone-900 w-3/4 h-screen">
-          <Chat name="Alice" />
+          <Register />
+          {/* <Chat name="Alice" /> */}
         </div>
       </main>
     </ApolloProvider>
