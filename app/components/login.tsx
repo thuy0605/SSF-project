@@ -1,15 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
-import { Chat } from "./chat";
-import { useMutation, gql } from "@apollo/client";
 import { User } from "./type";
-import { useFetch } from "./dataUser";
-import { GET_USERS } from "./dataUser";
+import { useMutation, gql } from "@apollo/client";
 
-const CREATE_USER = gql`
-  mutation CreateUser($body: UserInput) {
-    createUser(body: $body) {
+const LOGIN_USER = gql`
+  mutation LoginUser($credentials: Credentials) {
+    loginUser(credentials: $credentials) {
       message
       user {
         id
@@ -20,44 +16,36 @@ const CREATE_USER = gql`
   }
 `;
 
-export function Register() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [createUser] = useMutation(CREATE_USER, {
-    refetchQueries: [GET_USERS],
-  });
+export function Login() {
+  const [currentUser, setCurrentUser] = useState<Omit<User, "id"> | null>(null);
+  const [loginUser] = useMutation(LOGIN_USER);
 
-  const { data } = useFetch();
-  useEffect(() => {
-    if (data) {
-      setUsers([...data.users]);
-    }
-  }, [data]);
-  console.log("users", users);
-
-  const registerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const username = e.currentTarget.username.value;
     const password = e.currentTarget.password.value;
+    console.log("username", username);
+    console.log("password", password);
     try {
-      createUser({
+      const response = await loginUser({
         variables: {
-          body: {
+          credentials: {
             username,
             password,
           },
         },
       });
+      console.log("response", response);
     } catch (error) {
       console.log("error", error);
     }
-    e.currentTarget.reset();
+    // e.currentTarget.reset();
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-stone-800">
       <div className="max-w-md w-full p-6 bg-stone-500	 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
-        <form className="space-y-4" onSubmit={registerSubmit}>
+        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
+        <form className="space-y-4" onSubmit={handleLogin}>
           <div>
             <label className="block text-gray-800">Username</label>
             <input
@@ -80,7 +68,7 @@ export function Register() {
             type="submit"
             className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
           >
-            Register
+            Login
           </button>
         </form>
       </div>

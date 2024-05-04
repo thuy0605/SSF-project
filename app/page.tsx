@@ -3,6 +3,7 @@ import { Chat } from "./components/chat";
 import { Register } from "./components/register";
 import { ApolloProvider } from "@apollo/client";
 import client from "./components/apollo_client";
+import { Login } from "./components/login";
 
 export default function Home() {
   return (
@@ -35,8 +36,9 @@ export default function Home() {
           </div>
         </div>
         <div className="bg-stone-900 w-3/4 h-screen">
-          <Register />
+          {/* <Register /> */}
           {/* <Chat name="Alice" /> */}
+          <Login />
         </div>
       </main>
     </ApolloProvider>

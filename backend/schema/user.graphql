@@ -21,7 +21,6 @@ input UserInput {
 }
 
 type LoginResponse {
-  token: String
   message: String
   user: User
 }

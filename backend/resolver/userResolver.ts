@@ -32,6 +32,19 @@ const userResolver = {
         return { user, message: "User created" };
       }
     },
+    loginUser: async (
+      _parent: undefined,
+      args: { credentials: { username: string; password: string } }
+    ): Promise<{ user: User; message: string }> => {
+      const user = await UserModel.findOne({
+        username: args.credentials.username,
+        password: args.credentials.password,
+      });
+      if (!user) {
+        throw new GraphQLError("Invalid credentials");
+      }
+      return { user, message: "Login successful" };
+    },
   },
 };
 
