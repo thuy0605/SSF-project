@@ -5,10 +5,11 @@ const chatSchema = new mongoose.Schema<Question>({
   question: {
     type: String,
   },
-  // owner: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User",
-  // },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
 export default mongoose.model<Question>("Question", chatSchema);

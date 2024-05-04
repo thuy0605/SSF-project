@@ -17,11 +17,17 @@ const chatResolver = {
       }
       return question;
     },
+    questionByOwner: async (
+      _parent: undefined,
+      args: { owner: string }
+    ): Promise<Question[]> => {
+      return await ChatModel.find({ owner: args.owner });
+    },
   },
   Mutation: {
     createQuestion: async (
       _parent: undefined,
-      args: { body: String }
+      args: { body: { question: string; owner: string } }
     ): Promise<Question> => {
       const question = await ChatModel.create(args.body);
       if (!question) {

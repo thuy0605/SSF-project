@@ -1,16 +1,18 @@
 type Question {
   id: ID
   question: String
-  # owner: User
+  owner: ID
 }
 
 type Query {
   questions: [Question]
   question(id: ID!): Question
+  questionByOwner(owner: ID!): [Question]
 }
 
 input QuestionInput {
   question: String!
+  owner: ID!
 }
 
 type Mutation {

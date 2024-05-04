@@ -4,7 +4,7 @@ type Question = {
   _id: mongoose.Types.ObjectId;
   id?: mongoose.Types.ObjectId;
   question: string;
-  // owner: mongoose.Types.ObjectId;
+  owner: mongoose.Types.ObjectId;
 };
 
 type User = Partial<Document> & {
