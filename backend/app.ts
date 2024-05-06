@@ -7,6 +7,7 @@ import { expressMiddleware } from "@apollo/server/express4";
 import typeDefs from "./schema/index";
 import chatResolver from "./resolver/chatResolver";
 import userResolver from "./resolver/userResolver";
+import answerResolver from "./resolver/answerResolver";
 import { log } from "console";
 
 const app = express();
@@ -24,7 +25,7 @@ const app = express();
 
     const server = new ApolloServer({
       typeDefs: typeDefs,
-      resolvers: [chatResolver, userResolver],
+      resolvers: [chatResolver, userResolver, answerResolver],
     });
 
     await server.start();

@@ -1,0 +1,22 @@
+type Answer {
+  id: ID
+  answer: String
+  owner: ID
+  question: ID
+}
+
+type Query {
+  answers: [Answer]
+  answer(id: ID!): Answer
+  answerByOwner(owner: ID!): [Answer]
+}
+
+input AnswerInput {
+  answer: String!
+  owner: ID!
+  question: ID!
+}
+
+type Mutation {
+  createAnswer(body: AnswerInput): Answer
+}
