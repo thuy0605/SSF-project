@@ -25,11 +25,33 @@ const chatResolver = {
     },
   },
   Mutation: {
+    updateQuestion: async (
+      _parent: undefined,
+      args: {
+        body: { answer: string };
+        id: string;
+      }
+    ): Promise<Question> => {
+      const question = await ChatModel.findByIdAndUpdate(
+        args.id,
+        { answer: args.body.answer },
+        {
+          new: true,
+        }
+      );
+
+      if (!question) {
+        throw new GraphQLError("Error");
+      } else {
+        return question;
+      }
+    },
     createQuestion: async (
       _parent: undefined,
       args: { body: { question: string; owner: string } }
     ): Promise<Question> => {
       const question = await ChatModel.create(args.body);
+
       if (!question) {
         throw new GraphQLError("Error");
       } else {

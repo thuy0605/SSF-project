@@ -17,18 +17,13 @@ const answerResolver = {
       }
       return answer;
     },
-    answerByOwner: async (
-      _parent: undefined,
-      args: { owner: string }
-    ): Promise<Answer[]> => {
-      return await AnswerModel.find({ owner: args.owner });
-    },
   },
   Mutation: {
     createAnswer: async (
       _parent: undefined,
-      args: { body: { answer: string; owner: string; question: string } }
+      args: { body: { answer: string; question: string } }
     ): Promise<Answer> => {
+      // Ask chat gpt to generate answer with args.body.question
       const answer = await AnswerModel.create(args.body);
       if (!answer) {
         throw new GraphQLError("Error");

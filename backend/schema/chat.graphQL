@@ -2,6 +2,7 @@ type Question {
   id: ID
   question: String
   owner: ID
+  answer: ID
 }
 
 type Query {
@@ -15,6 +16,11 @@ input QuestionInput {
   owner: ID!
 }
 
+input QuestionUpdateInput {
+  answer: ID
+}
+
 type Mutation {
+  updateQuestion(body: QuestionUpdateInput, id: ID!): Question
   createQuestion(body: QuestionInput): Question
 }

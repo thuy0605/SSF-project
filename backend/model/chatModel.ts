@@ -10,6 +10,10 @@ const chatSchema = new mongoose.Schema<Question>({
     ref: "User",
     required: true,
   },
+  answer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Answer",
+  },
 });
 
 export default mongoose.model<Question>("Question", chatSchema);
