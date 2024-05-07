@@ -23,7 +23,6 @@ const answerResolver = {
       _parent: undefined,
       args: { body: { answer: string; question: string } }
     ): Promise<Answer> => {
-      // Ask chat gpt to generate answer with args.body.question
       const answer = await AnswerModel.create(args.body);
       if (!answer) {
         throw new GraphQLError("Error");

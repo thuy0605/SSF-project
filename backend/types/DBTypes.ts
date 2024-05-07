@@ -5,7 +5,7 @@ type Question = {
   id?: mongoose.Types.ObjectId;
   question: string;
   owner: mongoose.Types.ObjectId;
-  answer: mongoose.Types.ObjectId;
+  answer: string;
 };
 
 type Answer = {

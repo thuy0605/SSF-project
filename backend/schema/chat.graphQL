@@ -2,7 +2,7 @@ type Question {
   id: ID
   question: String
   owner: ID
-  answer: ID
+  answer: String
 }
 
 type Query {

@@ -1,6 +1,16 @@
 import { Question } from "../types/DBTypes";
 import ChatModel from "../model/chatModel";
 import { GraphQLError } from "graphql";
+import openai from "openai";
+
+const openaiAPIKey = process.env.OPENAI_API_KEY;
+if (!openaiAPIKey) {
+  throw new Error("OPENAI_API_KEY is not defined");
+}
+
+const openaiClient = new openai.OpenAI({
+  apiKey: openaiAPIKey,
+});
 
 const chatResolver = {
   Query: {
@@ -50,12 +60,34 @@ const chatResolver = {
       _parent: undefined,
       args: { body: { question: string; owner: string } }
     ): Promise<Question> => {
-      const question = await ChatModel.create(args.body);
+      try {
+        // Send the question to OpenAI's ChatGPT model for generating the answer
+        const response = await openaiClient.chat.completions.create({
+          model: "gpt-3.5-turbo",
+          messages: [
+            { role: "system", content: `User: ${args.body.question}` },
+          ],
+        });
 
-      if (!question) {
+        // Extract the response from OpenAI
+        const answer = response.choices[0].message.content;
+        console.log("answer from AI", answer);
+
+        // Create the question in the database
+        const question = await ChatModel.create({
+          question: args.body.question,
+          owner: args.body.owner,
+          answer: answer,
+        });
+
+        if (!question) {
+          throw new GraphQLError("Error");
+        } else {
+          return question;
+        }
+      } catch (error) {
+        console.error("Error in createQuestion", error);
         throw new GraphQLError("Error");
-      } else {
-        return question;
       }
     },
   },
