@@ -1,19 +1,21 @@
 type Props = {
-  name: string;
+  userID: string;
 };
 
 interface Question {
-  id: number;
+  id: string;
   question: string;
+  answer: string;
+  owner: string;
 }
 
 interface Answer {
-  id: number;
+  id: string;
   answer: string;
 }
 
 interface User {
-  id: number;
+  id: string;
   username: string;
   password: string;
 }

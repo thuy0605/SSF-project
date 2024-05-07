@@ -7,13 +7,15 @@ import { useMutation, useQuery, gql } from "@apollo/client";
 const CREATE_QUESTION = gql`
   mutation CreateQuestion($body: QuestionInput) {
     createQuestion(body: $body) {
+      answer
       id
+      owner
       question
     }
   }
 `;
 
-export function Chat({ name }: Props) {
+export function Chat({ userID }: Props) {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [createQuestion] = useMutation(CREATE_QUESTION, {
@@ -23,8 +25,11 @@ export function Chat({ name }: Props) {
   const { data } = useFetch();
 
   useEffect(() => {
-    if (data) {
-      setQuestions([...data.questions]);
+    if (data && userID) {
+      const updatedQuestions = data.questions.filter((question: Question) => {
+        return question.owner === userID;
+      });
+      setQuestions([...updatedQuestions]);
     }
   }, [data]);
 
@@ -35,6 +40,7 @@ export function Chat({ name }: Props) {
       createQuestion({
         variables: {
           body: {
+            owner: userID,
             question,
           },
         },
@@ -44,15 +50,6 @@ export function Chat({ name }: Props) {
     }
     e.currentTarget.reset();
   };
-
-  // const handleAnswer = () => {
-  //   for (let i = 0; i < questions.length; i++) {
-  //     setAnswers([
-  //       ...answers,
-  //       { id: questions[i].id, message: answers[i].message },
-  //     ]);
-  //   }
-  // };
 
   console.log("questions", questions);
   console.log("answers", answers);
@@ -68,7 +65,7 @@ export function Chat({ name }: Props) {
             >
               <h1 className="text-slate-100">{question.question}</h1>
               <p className="text-slate-400">
-                {answers.find((answer) => answer.id === question.id)?.answer}
+                {question.answer ? question.answer : "No answer yet"}
               </p>
             </div>
           ))}

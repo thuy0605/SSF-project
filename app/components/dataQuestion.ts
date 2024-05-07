@@ -5,6 +5,8 @@ export const GET_QUESTIONS = gql`
     questions {
       id
       question
+      answer
+      owner
     }
   }
 `;
