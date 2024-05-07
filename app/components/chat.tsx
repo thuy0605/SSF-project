@@ -56,7 +56,6 @@ export function Chat({ userID }: Props) {
   return (
     <div className="flex flex-col relative h-screen w-full">
       <div className="h-4/6 w-11/12 ml-10 mt-10">
-        <h1>Answer will show here</h1>
         <div className="flex flex-col h-full w-full bg-stone-900 rounded-md overflow-y-scroll">
           {questions?.map((question: Question) => (
             <div

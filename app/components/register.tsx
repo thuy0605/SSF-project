@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-import { Chat } from "./chat";
 import { useMutation, gql } from "@apollo/client";
 import { User } from "./type";
 import { useFetch } from "./dataUser";
 import { GET_USERS } from "./dataUser";
+import { set } from "mongoose";
+import { Login } from "./login";
 
 const CREATE_USER = gql`
   mutation CreateUser($body: UserInput) {
@@ -22,6 +23,9 @@ const CREATE_USER = gql`
 
 export function Register() {
   const [users, setUsers] = useState<User[]>([]);
+  const [showRegister, setShowRegister] = useState<boolean>(true);
+  const [showLogin, setShowLogin] = useState<boolean>(false);
+
   const [createUser] = useMutation(CREATE_USER, {
     refetchQueries: [GET_USERS],
   });
@@ -50,40 +54,49 @@ export function Register() {
     } catch (error) {
       console.log("error", error);
     }
+    setShowRegister(false);
+    setShowLogin(true);
     e.currentTarget.reset();
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-stone-800">
-      <div className="max-w-md w-full p-6 bg-stone-500	 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold text-center mb-6">Register</h2>
-        <form className="space-y-4" onSubmit={registerSubmit}>
-          <div>
-            <label className="block text-gray-800">Username</label>
-            <input
-              id="username"
-              type="text"
-              className="form-input mt-1 block bg-stone-300	border border-gray-500 rounded-md focus:outline-none focus:border-slate-900 text-black w-full"
-              placeholder="@username"
-            />
+    <div>
+      {showRegister && (
+        <div className="min-h-screen flex items-center justify-center bg-stone-800">
+          <div className="max-w-md w-full p-6 bg-stone-500	 rounded-lg shadow-md">
+            <h2 className="text-2xl font-semibold text-center mb-6">
+              Register
+            </h2>
+            <form className="space-y-4" onSubmit={registerSubmit}>
+              <div>
+                <label className="block text-gray-800">Username</label>
+                <input
+                  id="username"
+                  type="text"
+                  className="form-input mt-1 block bg-stone-300	border border-gray-500 rounded-md focus:outline-none focus:border-slate-900 text-black w-full"
+                  placeholder="@username"
+                />
+              </div>
+              <div>
+                <label className="block text-gray-800">Password</label>
+                <input
+                  id="password"
+                  type="password"
+                  className="form-input mt-1 block bg-stone-300	border border-gray-500 rounded-md focus:outline-none focus:border-slate-900 text-black w-full"
+                  placeholder="@password"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+              >
+                Register
+              </button>
+            </form>
           </div>
-          <div>
-            <label className="block text-gray-800">Password</label>
-            <input
-              id="password"
-              type="password"
-              className="form-input mt-1 block bg-stone-300	border border-gray-500 rounded-md focus:outline-none focus:border-slate-900 text-black w-full"
-              placeholder="@password"
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
-          >
-            Register
-          </button>
-        </form>
-      </div>
+        </div>
+      )}
+      {showLogin && <Login />}
     </div>
   );
 }

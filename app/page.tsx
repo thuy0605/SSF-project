@@ -36,9 +36,8 @@ export default function Home() {
           </div>
         </div>
         <div className="bg-stone-900 w-3/4 h-screen">
-          {/* <Register /> */}
-          {/* <Chat name="Alice" /> */}
-          <Login />
+          <Register />
+          {/* <Login /> */}
         </div>
       </main>
     </ApolloProvider>
