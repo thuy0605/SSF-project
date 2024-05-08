@@ -1,8 +1,8 @@
 "use client";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Props, Answer, Question } from "./type";
 import { GET_QUESTIONS, useFetch } from "./dataQuestion";
-import { useMutation, useQuery, gql } from "@apollo/client";
+import { useMutation, gql } from "@apollo/client";
 
 const CREATE_QUESTION = gql`
   mutation CreateQuestion($body: QuestionInput) {
@@ -31,7 +31,7 @@ export function Chat({ userID }: Props) {
       });
       setQuestions([...updatedQuestions]);
     }
-  }, [data]);
+  }, [data, userID]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -8,6 +8,7 @@ import userResolver from "./resolver/userResolver";
 import answerResolver from "./resolver/answerResolver";
 
 import gql from "graphql-tag";
+import mongoConnect from "./lib/db";
 
 const typeDefs = gql`
   type Answer {
@@ -89,7 +90,10 @@ const server = new ApolloServer({
 
 // Typescript: req has the type NextRequest
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
-  context: async (req) => ({ req }),
+  context: async (req) => {
+    await mongoConnect();
+    return { req };
+  },
 });
 
 export { handler as GET, handler as POST };

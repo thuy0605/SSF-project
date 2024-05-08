@@ -1,18 +1,24 @@
 "use client";
-import { Chat } from "./components/chat";
-import { Register } from "./components/register";
-import { ApolloProvider } from "@apollo/client";
-import client from "./components/apollo_client";
-import { Login } from "./components/login";
+import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { Register } from "./(components)/register";
 
 export default function Home() {
+  const graphqlEndpoint =
+    process.env.GRAPHQL_ENDPOINT ??
+    "https://chatboxproject-beta.vercel.app/api/graphql";
+
+  const client = new ApolloClient({
+    uri: graphqlEndpoint,
+    cache: new InMemoryCache(),
+  });
+
   return (
     <ApolloProvider client={client}>
       <main className="flex w-full h-full">
         <div className="flex flex-col justify-center w-1/4 h-screen">
           <div className="flex flex-col justify-center h-1/3 ">
             <h1 className="flex justify-start ml-1 mt-10 font-mono text-5xl text-amber-600">
-              Let's make
+              Let make
             </h1>
             <h1 className="flex justify-center mt-10 font-mono text-7xl text-amber-400	">
               Chatbox

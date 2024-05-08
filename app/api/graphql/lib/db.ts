@@ -1,13 +1,12 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-dotenv.config();
+
+const databaseUrl =
+  process.env.DATABASE_URL ??
+  "mongodb+srv://thanhthuyta1989:L7MEAyx0YCLDvx2O@sssfcourse.2hh9exy.mongodb.net/?retryWrites=true&w=majority&appName=SSSFcourse";
 
 const mongoConnect = async () => {
   try {
-    if (!process.env.DATABASE_URL) {
-      throw new Error("Database URL not set in .env file");
-    }
-    const connection = await mongoose.connect(process.env.DATABASE_URL);
+    const connection = await mongoose.connect(databaseUrl);
     console.log("DB connected successfully");
     return connection;
   } catch (error) {
