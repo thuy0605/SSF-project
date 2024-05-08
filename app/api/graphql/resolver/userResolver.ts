@@ -1,17 +1,17 @@
 import { GraphQLError } from "graphql";
 import { User, UserWithoutPasswordRole } from "../types/DBTypes";
-import UserModel from "../model/userModel";
+import userModel from "../model/userModel";
 
 const userResolver = {
   Query: {
     users: async (): Promise<UserWithoutPasswordRole[]> => {
-      return await UserModel.find();
+      return await userModel.find();
     },
     user: async (
       _parent: undefined,
       args: { id: string }
     ): Promise<User | null> => {
-      const user = await UserModel.findById(args.id);
+      const user = await userModel.findById(args.id);
       if (!user) {
         throw new GraphQLError("User not found");
       }
@@ -25,7 +25,7 @@ const userResolver = {
     ): Promise<{ user: User; message: string }> => {
       console.log("createUser -> args", args);
 
-      const user = await UserModel.create(args.body);
+      const user = await userModel.create(args.body);
       if (!user) {
         throw new GraphQLError("Error");
       } else {
@@ -36,7 +36,7 @@ const userResolver = {
       _parent: undefined,
       args: { credentials: { username: string; password: string } }
     ): Promise<{ user: User; message: string }> => {
-      const user = await UserModel.findOne({
+      const user = await userModel.findOne({
         username: args.credentials.username,
         password: args.credentials.password,
       });

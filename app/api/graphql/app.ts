@@ -5,10 +5,9 @@ import cors from "cors";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import typeDefs from "./schema/index";
-import chatResolver from "./resolver/chatResolver";
+import chatResolver from "./resolver/questionResolver";
 import userResolver from "./resolver/userResolver";
 import answerResolver from "./resolver/answerResolver";
-import { log } from "console";
 
 const app = express();
 (async () => {

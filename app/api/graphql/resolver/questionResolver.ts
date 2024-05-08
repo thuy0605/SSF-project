@@ -1,5 +1,5 @@
 import { Question } from "../types/DBTypes";
-import ChatModel from "../model/chatModel";
+import questionModel from "../model/questionModel";
 import { GraphQLError } from "graphql";
 import openai from "openai";
 
@@ -15,13 +15,13 @@ const openaiClient = new openai.OpenAI({
 const chatResolver = {
   Query: {
     questions: async (): Promise<Question[]> => {
-      return await ChatModel.find();
+      return await questionModel.find();
     },
     question: async (
       _parent: undefined,
       args: { id: string }
     ): Promise<Question | null> => {
-      const question = await ChatModel.findById(args.id);
+      const question = await questionModel.findById(args.id);
       if (!question) {
         throw new GraphQLError("Chat not found");
       }
@@ -31,7 +31,7 @@ const chatResolver = {
       _parent: undefined,
       args: { owner: string }
     ): Promise<Question[]> => {
-      return await ChatModel.find({ owner: args.owner });
+      return await questionModel.find({ owner: args.owner });
     },
   },
   Mutation: {
@@ -42,7 +42,7 @@ const chatResolver = {
         id: string;
       }
     ): Promise<Question> => {
-      const question = await ChatModel.findByIdAndUpdate(
+      const question = await questionModel.findByIdAndUpdate(
         args.id,
         { answer: args.body.answer },
         {
@@ -74,7 +74,7 @@ const chatResolver = {
         console.log("answer from AI", answer);
 
         // Create the question in the database
-        const question = await ChatModel.create({
+        const question = await questionModel.create({
           question: args.body.question,
           owner: args.body.owner,
           answer: answer,

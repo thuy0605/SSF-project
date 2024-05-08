@@ -1,6 +1,6 @@
 import mongoose, { Document } from "mongoose";
 
-type Question = {
+type Question = Partial<Document> & {
   _id: mongoose.Types.ObjectId;
   id?: mongoose.Types.ObjectId;
   question: string;
@@ -8,7 +8,7 @@ type Question = {
   answer: string;
 };
 
-type Answer = {
+type Answer = Partial<Document> & {
   _id: mongoose.Types.ObjectId;
   id?: mongoose.Types.ObjectId;
   answer: string;

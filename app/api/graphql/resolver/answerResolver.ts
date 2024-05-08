@@ -1,17 +1,17 @@
 import { Answer } from "../types/DBTypes";
-import AnswerModel from "../model/answerModel";
+import answerModel from "../model/answerModel";
 import { GraphQLError } from "graphql";
 
 const answerResolver = {
   Query: {
     answers: async (): Promise<Answer[]> => {
-      return await AnswerModel.find();
+      return await answerModel.find();
     },
     answer: async (
       _parent: undefined,
       args: { id: string }
     ): Promise<Answer | null> => {
-      const answer = await AnswerModel.findById(args.id);
+      const answer = await answerModel.findById(args.id);
       if (!answer) {
         throw new GraphQLError("Answer not found");
       }
@@ -23,7 +23,7 @@ const answerResolver = {
       _parent: undefined,
       args: { body: { answer: string; question: string } }
     ): Promise<Answer> => {
-      const answer = await AnswerModel.create(args.body);
+      const answer = await answerModel.create(args.body);
       if (!answer) {
         throw new GraphQLError("Error");
       } else {

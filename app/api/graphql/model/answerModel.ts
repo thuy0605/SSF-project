@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Answer } from "../types/DBTypes";
-import e from "express";
 
 const answerSchema = new mongoose.Schema<Answer>({
   answer: {
@@ -8,4 +7,9 @@ const answerSchema = new mongoose.Schema<Answer>({
   },
 });
 
-export default mongoose.model<Answer>("Answer", answerSchema);
+let answerModel = mongoose.models["Answer"];
+if (!answerModel) {
+  answerModel = mongoose.model<Answer>("Answer", answerSchema);
+}
+
+export default answerModel;

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Question } from "../types/DBTypes";
 
-const chatSchema = new mongoose.Schema<Question>({
+const questionSchema = new mongoose.Schema<Question>({
   question: {
     type: String,
   },
@@ -15,4 +15,9 @@ const chatSchema = new mongoose.Schema<Question>({
   },
 });
 
-export default mongoose.model<Question>("Question", chatSchema);
+let questionModel = mongoose.models["Question"];
+if (!questionModel) {
+  questionModel = mongoose.model<Question>("Question", questionSchema);
+}
+
+export default questionModel;
