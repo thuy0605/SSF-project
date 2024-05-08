@@ -21,7 +21,7 @@ const CREATE_USER = gql`
   }
 `;
 
-export function Register() {
+export default function Register() {
   const [users, setUsers] = useState<User[]>([]);
   const [showRegister, setShowRegister] = useState<boolean>(true);
   const [showLogin, setShowLogin] = useState<boolean>(false);

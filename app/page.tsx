@@ -1,11 +1,11 @@
 "use client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-import { Register } from "./(components)/register";
+import Register from "./(components)/register";
 
 export default function Home() {
   const graphqlEndpoint =
-    process.env.GRAPHQL_ENDPOINT ??
-    "https://chatboxproject-beta.vercel.app/api/graphql";
+    process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ??
+    "http://localhost:3000/api/graphql";
 
   const client = new ApolloClient({
     uri: graphqlEndpoint,
