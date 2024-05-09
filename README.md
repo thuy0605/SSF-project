@@ -1,6 +1,8 @@
-# SSF-project
+# Member: Thuy Ta 
 
-This project is about ChatBoxAI. The idea is that this chat app will combine with OpenAI and be used for anyone.
+# ChatBoxAI-project
+
+This project is about ChatBoxAI. The idea is that this chat app will combine with OpenAI and be used for anyone, it is useful in customer service.
 
 - User Interaction: Users interact with ChatBoxAI by typing queries or requirements into the chat interface provided by the frontend application.
 - Backend Processing: Receiving user inputs, the frontend forwards the content to the backend infrastructure of ChatBoxAI. The backend reformats the content as necessary and prepares it for submission to the OpenAI API.
@@ -9,13 +11,13 @@ This project is about ChatBoxAI. The idea is that this chat app will combine wit
 
 ## User stories:
 
-- As a user, I want to be able to initiate a conversation with ChatBoxAI by typing my queries or requirements into the chat interface.
 - As a user, I want ChatBoxAI to have a user-friendly interface that is easy to navigate and understand.
-- As a user, I want ChatBoxAI to understand and interpret my queries accurately, regardless of the complexity or language used.
-- As a user, I want ChatBoxAI to be able to handle multiple queries within the same conversation session.
-- As a user, I want ChatBoxAI to be able to provide suggestions or options when I'm unsure about what to ask or need.
-- As a user, I want ChatBoxAI to maintain privacy and security standards, ensuring that my conversations and data are protected.
-- As a user, I want to search my requirements and the respones of these requirements.
+- As a user I want to register my account  to use the ChatBoxAI app
+- As a user I want to login to use the ChatBoxAI app
+- As a user I want to go back to register page to create my account
+- As a user I want ChatBoxAI could detect my question and response the answer
+- As a user I want ChatBoxAI show me all questions and answers that I asked 
+
 
 ## Install
 
@@ -25,8 +27,10 @@ Client
 npm run dev
 ```
 
-Server
+# Demo:
+[Demo video ChatBox app](https://www.loom.com/share/5aebcea42add4767939ae6576d2a3f48){target="_blank"}
 
-```bash
-npx tsx ./backend/index.ts
-```
+# Link to the app:
+[ChatBoxApp](https://chatboxproject-beta.vercel.app/){target="_blank"}
+
+
