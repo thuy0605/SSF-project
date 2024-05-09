@@ -28,9 +28,9 @@ npm run dev
 ```
 
 # Demo:
-[Demo video ChatBox app](https://www.loom.com/share/5aebcea42add4767939ae6576d2a3f48){target="_blank"}
+[Demo video ChatBox app](https://www.loom.com/share/5aebcea42add4767939ae6576d2a3f48)
 
 # Link to the app:
-[ChatBoxApp](https://chatboxproject-beta.vercel.app/){target="_blank"}
+[ChatBoxApp](https://chatboxproject-beta.vercel.app/)
 
 
