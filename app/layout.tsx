@@ -40,7 +40,7 @@ export default function RootLayout({
                 and
               </h1>
               <h1 className="ml-1 mt-5 font-mono text-5xl text-amber-600">
-                TailwindCSS
+                Graphql
               </h1>
             </div>
           </div>

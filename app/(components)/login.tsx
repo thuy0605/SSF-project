@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { User } from "./type";
+import { User, Display } from "./type";
 import { useMutation, gql } from "@apollo/client";
 import { Chat } from "./chat";
 import { useFetch } from "./dataUser";
@@ -18,7 +18,7 @@ const LOGIN_USER = gql`
   }
 `;
 
-export function Login() {
+export default function Login({ toggleRegisterLogin }: Display) {
   const [currentUser, setCurrentUser] = useState<User>({
     id: "",
     username: "",
@@ -63,12 +63,32 @@ export function Login() {
     setShowChat(true);
     // e.currentTarget.reset();
   };
+
+  const handleGoBack = () => {
+    toggleRegisterLogin();
+  };
   return (
     <div>
       <div>
         {showLogin && (
           <div className="min-h-screen flex items-center justify-center bg-stone-800">
             <div className="max-w-md w-full p-6 bg-stone-500 rounded-lg shadow-md">
+              <button onClick={handleGoBack}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+              </button>
               <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
               <form className="space-y-4" onSubmit={handleLogin}>
                 <div>

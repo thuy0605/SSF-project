@@ -2,13 +2,13 @@ import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { ApolloServer } from "@apollo/server";
 import { NextRequest } from "next/server";
 
-// import typeDefs from "./schema/index";
 import questionResolver from "./resolver/questionResolver";
 import userResolver from "./resolver/userResolver";
 import answerResolver from "./resolver/answerResolver";
 
 import gql from "graphql-tag";
 import mongoConnect from "./lib/db";
+import mongoose from "mongoose";
 
 const typeDefs = gql`
   type Answer {
@@ -91,7 +91,15 @@ const server = new ApolloServer({
 // Typescript: req has the type NextRequest
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   context: async (req) => {
-    await mongoConnect();
+    const connection = mongoose.connection;
+    if (
+      connection.readyState === 0 ||
+      connection.readyState === 3 ||
+      connection.readyState === 99
+    ) {
+      await mongoConnect();
+    }
+
     return { req };
   },
 });

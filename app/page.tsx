@@ -1,6 +1,7 @@
 "use client";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Register from "./(components)/register";
+import { useState } from "react";
 
 export default function Home() {
   const graphqlEndpoint =

@@ -6,7 +6,7 @@ import { User } from "./type";
 import { useFetch } from "./dataUser";
 import { GET_USERS } from "./dataUser";
 import { set } from "mongoose";
-import { Login } from "./login";
+import Login from "./login";
 
 const CREATE_USER = gql`
   mutation CreateUser($body: UserInput) {
@@ -61,24 +61,15 @@ export default function Register() {
     e.currentTarget.reset();
   };
 
+  const toggleRegisterLogin = () => {
+    setShowRegister(!showRegister);
+    setShowLogin(!showLogin);
+    setShowAlert(!showAlert);
+  };
+
   return (
     <div>
-      <div className=" flex items-center justify-center bg-stone-800">
-        {showAlert && (
-          <div className="mr-20">
-            <button
-              className=" text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
-              onClick={() => {
-                setShowRegister(false);
-                setShowLogin(true);
-                setShowAlert(false);
-              }}
-            >
-              I have already account
-            </button>
-          </div>
-        )}
-
+      <div>
         {showRegister && (
           <div className="min-h-screen flex items-center justify-center bg-stone-800">
             <div className="max-w-md w-full p-6 bg-stone-500	 rounded-lg shadow-md">
@@ -111,12 +102,25 @@ export default function Register() {
                   Register
                 </button>
               </form>
+              {showAlert && (
+                <button
+                  type="submit"
+                  className="w-full bg-blue-500 text-white py-2 px-4 mt-5 rounded hover:bg-blue-600 transition-colors"
+                  onClick={() => {
+                    setShowRegister(false);
+                    setShowLogin(true);
+                    setShowAlert(false);
+                  }}
+                >
+                  Login
+                </button>
+              )}
             </div>
           </div>
         )}
       </div>
 
-      {showLogin && <Login />}
+      {showLogin && <Login toggleRegisterLogin={toggleRegisterLogin} />}
     </div>
   );
 }

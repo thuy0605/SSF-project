@@ -2,6 +2,10 @@ type Props = {
   userID: string;
 };
 
+type Display = {
+  toggleRegisterLogin: () => void;
+};
+
 interface Question {
   id: string;
   question: string;
@@ -20,4 +24,4 @@ interface User {
   password: string;
 }
 
-export type { Props, Question, Answer, User };
+export type { Props, Question, Answer, User, Display };
