@@ -41,8 +41,8 @@ export default function Register() {
 
   const registerSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const username = e.currentTarget.username.value;
-    const password = e.currentTarget.password.value;
+    const username = e.currentTarget.username.value?.trim();
+    const password = e.currentTarget.password.value?.trim();
     try {
       createUser({
         variables: {

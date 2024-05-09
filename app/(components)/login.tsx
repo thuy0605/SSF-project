@@ -37,8 +37,8 @@ export default function Login({ toggleRegisterLogin }: Display) {
   }, [data, currentUser]);
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const username = e.currentTarget.username.value;
-    const password = e.currentTarget.password.value;
+    const username = e.currentTarget.username.value?.trim();
+    const password = e.currentTarget.password.value?.trim();
     console.log("username", username);
     console.log("password", password);
     try {
