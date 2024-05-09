@@ -11,7 +11,6 @@ This project is about ChatBoxAI. The idea is that this chat app will combine wit
 
 ## User stories:
 
-- As a user, I want ChatBoxAI to have a user-friendly interface that is easy to navigate and understand.
 - As a user I want to register my account  to use the ChatBoxAI app
 - As a user I want to login to use the ChatBoxAI app
 - As a user I want to go back to register page to create my account
@@ -28,9 +27,9 @@ npm run dev
 ```
 
 # Demo:
-[Demo video ChatBox app](https://www.loom.com/share/5aebcea42add4767939ae6576d2a3f48)
+[Demo video ChatBoxAI app](https://www.loom.com/share/5aebcea42add4767939ae6576d2a3f48)
 
 # Link to the app:
-[ChatBoxApp](https://chatboxproject-beta.vercel.app/)
+[ChatBoxAIApp](https://chatboxproject-beta.vercel.app/)
 
 
